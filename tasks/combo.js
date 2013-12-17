@@ -24,9 +24,8 @@ module.exports = function (grunt) {
         this.files.forEach(function (file) {
             var jsFile = file.src[0];
             var root = file.orig.cwd;
-            if(!/(\/|\\+)$/.test(root)){
-                root += path.sep;
-            }
+            jsFile = jsFile.replace(/\\+/g,"/");
+            root = root.replace(/(\\)?\/?$/,"/");
             var modName = jsFile.replace(root, '').replace(/\.js$/, '');
             grunt.log.writeln('Module ' + modName.cyan + ' created.');
 
